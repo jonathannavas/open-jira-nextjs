@@ -13,3 +13,11 @@ MongoDB URL Local:
 ```
 mongodb://localhost:27017/entriesdb
 ```
+
+## Configurar las variables de entorno en el archivo .env creandolo previamente
+
+## Llenar la base de datos con informacion de pruebas
+
+```
+http://localhost:3000/api/seed
+```
