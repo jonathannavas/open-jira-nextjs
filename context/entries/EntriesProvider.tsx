@@ -22,6 +22,20 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: '[Entry] - CreateEntry', payload: data })
   }
 
+  const deleteEntry = async (entry: Entry) => {
+    const { data } = await entriesApi.delete<Entry>(`/entries/${entry._id}`)
+    dispatch({ type: '[Entry] - Delete-Entry', payload: data })
+    refreshEntries()
+    enqueueSnackbar('Entrada eliminada con exito', {
+      variant: 'success',
+      autoHideDuration: 1500,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'right',
+      },
+    })
+  }
+
   const updateEntry = async (
     { _id, description, status }: Entry,
     showSnackbar = false
@@ -64,6 +78,7 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
         ...state,
         addNewEntry,
         updateEntry,
+        deleteEntry,
       }}
     >
       {children}

@@ -37,7 +37,7 @@ const EntryPage: FC<Props> = ({ entry }: Props) => {
   const [inputValue, setInputValue] = useState(entry.description)
   const [status, setStatus] = useState<EntryStatus>(entry.status)
   const [isTouched, setIsTouched] = useState(false)
-  const { updateEntry } = useContext(EntriesContext)
+  const { updateEntry, deleteEntry } = useContext(EntriesContext)
   const router = useRouter()
 
   const isNotValidForm = useMemo(
@@ -64,6 +64,11 @@ const EntryPage: FC<Props> = ({ entry }: Props) => {
 
     updateEntry(updatedEntry, true)
 
+    router.push('/')
+  }
+
+  const handleDelete = () => {
+    deleteEntry(entry)
     router.push('/')
   }
 
@@ -127,6 +132,7 @@ const EntryPage: FC<Props> = ({ entry }: Props) => {
           right: 30,
           backgroundColor: 'crimson',
         }}
+        onClick={handleDelete}
       >
         <DeleteIcon />
       </IconButton>
